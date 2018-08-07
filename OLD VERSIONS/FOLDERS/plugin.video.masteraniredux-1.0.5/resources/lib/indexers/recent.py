@@ -114,7 +114,6 @@ class Indexer:
         mode = 'episodes'
         for i in items:
             try:
-                episode_link = i['episodelink']
                 tvshowtitle = i['tvshowtitle']
                 anime_id = i['anime_id']
                 episode_id = i['episode_id'] if 'episode_id' in i else 0
@@ -129,7 +128,7 @@ class Indexer:
 
                 url = '%s?action=play' % sysaddon
                 try:
-                    url += '&anime_id=%s&episode_id=%s' % (anime_id, episode_link)
+                    url += '&anime_id=%s&episode_id=%s' % (anime_id, episode_id)
                 except:
                     pass
 
