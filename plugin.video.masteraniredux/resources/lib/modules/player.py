@@ -31,7 +31,6 @@ from resources.lib.modules import masterani
 from resources.lib.modules.control import progressDialog
 from resources.lib.modules.watched import Watched
 import resolveurl
-import urlresolver
 
 #GETLINKS
 def getlinks(url):
