@@ -101,7 +101,15 @@ def getdirect(hostname, url, quality, embed_id):
     if 'Drive.g' in hostname:
         mp4 = resolveurl.resolve(url)
     if 'Rapidvideo' in hostname:
-        mp4 = resolveurl.resolve(url)
+        duration=10000   #in milliseconds
+        message = "Cannot Play URL"
+        stream_url = resolveurl.HostedMediaFile(url=url).resolve()
+        # If urlresolver returns false then the video url was not resolved.
+        if not stream_url:
+            dialog = xbmcgui.Dialog()
+            dialog.notification("ResolveURL Error", message, xbmcgui.NOTIFICATION_INFO, duration)
+        else:        
+            mp4 = stream_url
     if 'Aika' in hostname:
         mp4 = url
     if 'Streamango' in hostname:

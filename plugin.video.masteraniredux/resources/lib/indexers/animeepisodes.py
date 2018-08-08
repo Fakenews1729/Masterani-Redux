@@ -108,7 +108,7 @@ class Indexer:
                 j += 1
                 tvshowtitle = i['title']
                 if tvshowtitle is None: tvshowtitle = i['label']
-                tvshowtitle = str(j) + ". " + tvshowtitle
+                tvshowtitle = str(j) + " - " + tvshowtitle
                 episode_id = i['episode_id']
                 anime_id = i['anime_id']
                 episode_link = i['episodelink']
