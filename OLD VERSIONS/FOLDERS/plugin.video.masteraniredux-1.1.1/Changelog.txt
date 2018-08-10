@@ -1,7 +1,3 @@
-﻿[1.1.2] - 2018-08-09
-- Fixed an error where shows with Unicode in the title (eg. Yu☆Gi☆Oh!) couldn't be scraped without throwing an error, you can now watch them fine.
-- Cleaned up the addon.xml file - Moved addon devs (past and present) to bottom of screen disclaimer, added a disclaimer mentioning that the addon is not legit, and that if you wish to support the anime makers, use Crunchyroll ot another similar service.
-
 [1.1.1] - 2018-08-08
 - Some aethetic changes.
 
@@ -9,8 +5,8 @@
 - Scraper now scrapes the website instead of the API.
 - Tiwi.kiwi is now disabled as it doesn't work anymore.
 - Now uses ResolveURL instead of URLResolver, and uses it much more.
-- Fixed the Aika, Drive.g and Rapidvideo sources.
-- Switched the way the show name and episode title appear in the player to the "correct" order now.
+- I fixed the Aika, Drive.g and Rapidvideo sources.
+- Switched the way the show name and episode title appear in the "correct" order now.
 - Major update, so updated by 0.1 rather than 0.0.1.
 
 [1.0.4] - 2018-06-21

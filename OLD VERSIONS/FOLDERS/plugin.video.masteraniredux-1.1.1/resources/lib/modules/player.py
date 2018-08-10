@@ -37,7 +37,7 @@ def getlinks(url):
     link_list = []	
     with requests.session() as s:
         p = s.get(url)
-        print (p.text).encode('utf-8')
+        print(p.text)
         try:
             videos = re.findall(r'videos = (\[.*?\])', p.text)[0]
             print videos
@@ -133,7 +133,7 @@ def play(anime_id, episode_id):
         return
 
 		
-    #Remove Tiwi Kiwi as it is broken
+    #Remove Tiwi Kiwi as it is broken (as said by SirTakoyaki)
 	
     for e in hosts:
         if 'Tiwi.kiwi' in e['name']:
