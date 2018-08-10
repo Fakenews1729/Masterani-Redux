@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-    MasterAni Add-on
+    Masterani Redux Add-on
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ def main_menu():
 
     if upgrade_warning is "":
         import xbmcgui
-        xbmcgui.Dialog().ok("Masterani Warning",
+        xbmcgui.Dialog().ok("Masterani Redux Warning",
                                     " \n\nIt has come to our attention that the addon stopped working for some people. During our investigation in the matter,"
                                     " we found that security upgrades rendered Kodi 16 unable to fetch the required data.\n\n"
                                     "If the addon is unable to load anything, you are affected by this. Please update your Kodi to the latest version.")

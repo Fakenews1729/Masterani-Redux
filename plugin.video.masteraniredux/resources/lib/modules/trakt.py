@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+#Currently unused... may be used in a later update
 """
     Covenant Add-on
 

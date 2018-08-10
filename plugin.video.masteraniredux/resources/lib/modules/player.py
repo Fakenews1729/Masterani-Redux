@@ -66,16 +66,6 @@ def getid(url):
         print id        
     return id
 	
-def getcover(url):
-    with requests.session() as s:
-        p = s.get(url)
-        cover = p.text
-        cover = cover.split('<img class="cover" src="', 1)[1]
-        print cover
-        cover = cover.split('"', 1)[0]
-        print cover 		
-    return cover
-	
 def getdirect(hostname, url, quality, embed_id):
     if 'Stream.moe' in hostname:
         mp4 = resolveurl.resolve(url)
@@ -111,10 +101,9 @@ def getdirect(hostname, url, quality, embed_id):
     if 'Drive.g' in hostname:
         mp4 = resolveurl.resolve(url)
     if 'Rapidvideo' in hostname:
-        duration=10000   #in milliseconds
+        duration=10000  
         message = "Cannot Play URL"
         stream_url = resolveurl.HostedMediaFile(url=url).resolve()
-        # If urlresolver returns false then the video url was not resolved.
         if not stream_url:
             dialog = xbmcgui.Dialog()
             dialog.notification("ResolveURL Error", message, xbmcgui.NOTIFICATION_INFO, duration)
@@ -132,7 +121,7 @@ def play(anime_id, episode_id):
     episode_link = episode_id
 	
     l1 = "Fetching video."
-    progressDialog.create(heading="Masterani", line1="Fetching video.")
+    progressDialog.create(heading="Masterani Redux", line1="Fetching video.")
     progressDialog.update(0, line1=l1, line3="Loading hosts.")
     
     hosts = getlinks(episode_link)   
@@ -140,7 +129,7 @@ def play(anime_id, episode_id):
     #linkforcover = getcover(episode_link)
 	
     if hosts is None:
-        xbmcgui.Dialog().ok("Masterani", "Something went wrong.", "Please try again later.")
+        xbmcgui.Dialog().ok("Masterani Redux", "Something went wrong.", "Please try again later.")
         return
 
 		
@@ -299,10 +288,6 @@ class MAPlayer(xbmc.Player):
 
             tvshowtitle = c['title']
             poster = c['poster']
-            print poster
-            genre = c['genre']
-            print genre
-			
             coverlink = "http://cdn.masterani.me/poster/" + poster
             print coverlink
 
@@ -315,18 +300,17 @@ class MAPlayer(xbmc.Player):
             episode = e['info']['episode']
             if ctype is 'video': title = c['title']
             if title is None: title = "Episode %s" % episode
-			
-            year = e['info']['aired']
-            year = year.split("-", 1)[0]
-            print year
-
-            plot = e['info']['description']
-            print plot
 
             item.setInfo(type="video",
                          infoLabels={'tvshowtitle': title, 'title': tvshowtitle, 'episode': int(episode),
-                                     'season': int(season), 'mediatype': ctype, 'genre': genre,
-                                     'year': year, 'plot': plot})
+                                     'season': int(season), 'mediatype': ctype})
+									 
+            year = e['info']['aired'].split("-", 1)[0]
+            plot = e['info']['description']
+
+            item.setInfo(type="video",
+                         infoLabels={'year': year, 'plot': plot})
+            
 
         except:
             pass

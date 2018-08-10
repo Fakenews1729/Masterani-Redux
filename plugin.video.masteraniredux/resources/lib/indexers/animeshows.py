@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-    MasterAni Add-on
+    Masterani Redux Add-on
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -135,7 +135,7 @@ class Indexer:
         self.list = masterani.extract_data_from_filter_list(result)
 
         if len(self.list) is 0:
-            xbmcgui.Dialog().ok("Masterani", "No anime found.", "Try other options.")
+            xbmcgui.Dialog().ok("Masterani Redux", "No anime found.", "Try other options.")
             return
 
         self.last_page = result['last_page']

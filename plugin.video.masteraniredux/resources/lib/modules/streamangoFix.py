@@ -1,4 +1,6 @@
 #gets the url for Streamango, directly translated from equivalent Javascript function
+#Unneeded now but I'll keep it in the addon just in case Streamango breaks in ResolveURL
+
 
 array = ['split', 'BIGNF', 'length', 'PxMzv', 'fromCharCode', 'XMJZt', 'Uknst', 'indexOf', 'charAt', 'IgrAi', 'isrQD', 'NrFxr', 'Bfusx', 'EGuje', 'RTbDl', 'skTIa', 'tPROO', 'EyCRq', 'replace', 'reverse', 'NcOIe', '4|6|5|0|7|3|2|1|8', '6|2|9|8|5|4|7|10|0|3|1', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=', 'WSNWx']
 def rotate(l, n):
