@@ -1,6 +1,7 @@
 ﻿[1.1.2] - 2018-08-09
 - Fixed an error where shows with Unicode in the title (eg. Yu☆Gi☆Oh!) couldn't be scraped without throwing an error, you can now watch them fine.
-- Cleaned up the addon.xml file - Moved addon devs (past and present) to bottom of screen disclaimer, added a disclaimer mentioning that the addon is not legit, and that if you wish to support the anime makers, use Crunchyroll ot another similar service.
+- Cleaned up the addon.xml file - Moved addon devs (past and present) to bottom of screen disclaimer, added a disclaimer mentioning that the addon is not "legit", and that if you wish to support the anime makers, use Crunchyroll ot another similar service.
+- Aniupload, Bakavideo, and BETA hosts now false by default, at least until I know they work.
 
 [1.1.1] - 2018-08-08
 - Some aethetic changes.
