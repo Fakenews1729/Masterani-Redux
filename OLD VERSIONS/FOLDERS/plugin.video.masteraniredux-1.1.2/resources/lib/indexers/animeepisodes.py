@@ -42,7 +42,7 @@ class Indexer:
         return self.list
 
     def get_episodes(self, anime_id):
-        animedata = cache.get(masterani.get_anime_details, 3, anime_id)
+        animedata = masterani.get_anime_details(anime_id)
 
         show_link = animedata['showlink']
         episodes = animedata['episodes']

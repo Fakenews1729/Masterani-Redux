@@ -66,16 +66,6 @@ def getid(url):
         print id        
     return id
 	
-def getcover(url):
-    with requests.session() as s:
-        p = s.get(url)
-        cover = p.text
-        cover = cover.split('<img class="cover" src="', 1)[1]
-        print cover
-        cover = cover.split('"', 1)[0]
-        print cover 		
-    return cover
-	
 def getdirect(hostname, url, quality, embed_id):
     if 'Stream.moe' in hostname:
         mp4 = resolveurl.resolve(url)
@@ -137,7 +127,6 @@ def play(anime_id, episode_id):
     
     hosts = getlinks(episode_link)   
     ep_id = getid(episode_link)
-    #linkforcover = getcover(episode_link)
 	
     if hosts is None:
         xbmcgui.Dialog().ok("Masterani", "Something went wrong.", "Please try again later.")
@@ -247,7 +236,7 @@ def play(anime_id, episode_id):
 
     if len(hostlist) is 0:
         progressDialog.close()
-        xbmcgui.Dialog().ok("Masterani Redux", "No supported hosts found.")
+        xbmcgui.Dialog().ok("Masterani", "No supported hosts found.")
         return
 
     if 'false' in autoplay:
@@ -255,7 +244,7 @@ def play(anime_id, episode_id):
     else:
         if len(hostlist) is 0:
             progressDialog.close()
-            xbmcgui.Dialog().ok("Masterani Redux", "No hosts found for autoplay.", "Change addon settings and try again.")
+            xbmcgui.Dialog().ok("Masterani", "No hosts found for autoplay.", "Change addon settings and try again.")
             hostDialog = -1
         else:
             hostDialog = autoplayHost
@@ -298,15 +287,9 @@ class MAPlayer(xbmc.Player):
             ctype = 'video' if int(ctype) is 2 else 'episode'
 
             tvshowtitle = c['title']
-            poster = c['poster']
-            print poster
-            genre = c['genre']
-            print genre
-			
-            coverlink = "http://cdn.masterani.me/poster/" + poster
-            print coverlink
+            poster = c['poster'][0]
 
-            item.setArt({'icon': coverlink, 'thumb': coverlink, 'poster': coverlink, 'tvshow.poster': coverlink, 'season.poster': coverlink})
+            item.setArt({'thumb': poster, 'poster': poster, 'tvshow.poster': poster, 'season.poster': poster})
 
             e = c['episodes'][self.episode_id]
             title = e['info']['title']
@@ -315,19 +298,10 @@ class MAPlayer(xbmc.Player):
             episode = e['info']['episode']
             if ctype is 'video': title = c['title']
             if title is None: title = "Episode %s" % episode
-			
-            year = e['info']['aired']
-            year = year.split("-", 1)[0]
-            print year
-
-            plot = e['info']['description']
-            print plot
 
             item.setInfo(type="video",
                          infoLabels={'tvshowtitle': title, 'title': tvshowtitle, 'episode': int(episode),
-                                     'season': int(season), 'mediatype': ctype, 'genre': genre,
-                                     'year': year, 'plot': plot})
-
+                                     'season': int(season), 'mediatype': ctype})
         except:
             pass
 
