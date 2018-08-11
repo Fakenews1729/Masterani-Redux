@@ -1,4 +1,8 @@
-﻿[1.1.4] - 2018-08-10
+﻿[1.1.5] - 2018-08-11
+- Fixes the add-on for Kodi 18 Leia
+- The Leia Update
+
+[1.1.4] - 2018-08-10
 - There was a massive metadata meltdown, took multiple hours to fix... thank god thats done... hopefully.
 - Dubbing this update the "Massive Metadata Update" or "MMU" for short.
 

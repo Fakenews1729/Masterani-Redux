@@ -187,10 +187,6 @@ class Indexer:
 
         if self.query is None or self.query is '': return
 
-        if query is None:
-            control.execute("Container.Update(%s?action=search&query=%s, false)" % (sys.argv[0], self.query))
-            return
-
         result = client.request("http://www.masterani.me/api/anime/search?search=%s&sb=true" % self.query)
         result = json.loads(result)
 
