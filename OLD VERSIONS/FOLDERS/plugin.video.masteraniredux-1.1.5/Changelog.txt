@@ -1,7 +1,4 @@
-﻿[1.1.6] - 2018-08-12
-- Removed Aniupload, Bakavideo and Beta hosts as they are no longer on Masterani. Thanks to xMunchWasTaken for this information.
-
-[1.1.5] - 2018-08-11
+﻿[1.1.5] - 2018-08-11
 - Fixes the add-on for Kodi 18 Leia
 - The Leia Update
 

@@ -70,9 +70,32 @@ def getdirect(hostname, url, quality, embed_id):
     if 'Stream.moe' in hostname:
         mp4 = resolveurl.resolve(url)
     if 'MP4Upload' in hostname:
-        mp4 = resolveurl.resolve(url)     
+        mp4 = resolveurl.resolve(url)
+    if 'Bakavideo' in hostname:
+        #Couldn't actually find any instances of bakavideo on Masterani so I'll assume the original way works.
+        #Actually believe that the site doesn't exist anymore
+        content = re.compile("go\((.+?)\)").findall(client.request(url))[0]
+        content = content.replace("'", "").replace(", ", "/")
+        content = "https://bakavideo.tv/" + content
+        content = client.request(content)
+        content = json.loads(content)
+        content = content['content']
+        content = base64.b64decode(content)
+        mp4s = client.parsedom(content, 'source', ret='src')
+        mp4 = ""
+        for link in mp4s:
+            if str(quality) in link:
+                mp4 = link
+            if mp4 is "":
+                mp4 = mp4s[0]
+    if 'Beta' in hostname:
+        #Same as Bakavideo, I couldn't actually find any Aniupload on the site, but if it is still there I'll assume the original way works.
+        mp4 = embed_id       
     if 'Vidstreaming' in hostname:
         mp4 = resolveurl.resolve(url)
+    if 'Aniupload' in hostname:
+        #Same as Bakavideo, I couldn't actually find any Aniupload on the site, but if it is still there I'll assume the original way works.
+        mp4 = re.compile("\(\[\{src: \"(.+?)\"").findall(client.request(url))[0]
     if 'Openload' in hostname:
         mp4 = resolveurl.resolve(url)
     if 'Drive.g' in hostname:
@@ -123,9 +146,24 @@ def play(anime_id, episode_id):
                 if 'MP4Upload' in e['name']:
                     hosts.remove(e)
 
+    if control.setting("host.aniupload") == "false":
+        for e in hosts:
+            if 'Aniupload' in e['name']:
+                hosts.remove(e)
+
+    if control.setting("host.bakavide") == "false":
+        for e in hosts:
+            if 'Bakavideo' in e['name']:
+                hosts.remove(e)
+
     if control.setting("host.youtube") == "false":
         for e in hosts:
             if 'YouTube' in e['name']:
+                hosts.remove(e)
+
+    if control.setting("host.beta") == "false":
+        for e in hosts:
+            if 'Beta' in e['name']:
                 hosts.remove(e)
         
     if control.setting("host.stream.moe") == "false":
