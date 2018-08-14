@@ -1,12 +1,9 @@
-﻿[1.1.7] - 2018-08-14
-- Changed the screenshots to be from real anime (1. Mikakunin de Shinkoukei, 2. Toradora!, 3. Love Live! School Idol Project)
-- Fixed movie metadata so now it shows year, genre, and plot. 
-
-[1.1.6] - 2018-08-12
+﻿[1.1.6] - 2018-08-12
 - Removed Aniupload, Bakavideo and Beta hosts as they are no longer on Masterani. Thanks to xMunchWasTaken for this information.
 
 [1.1.5] - 2018-08-11
 - Fixes the add-on for Kodi 18 Leia
+- The Leia Update
 
 [1.1.4] - 2018-08-10
 - There was a massive metadata meltdown, took multiple hours to fix... thank god thats done... hopefully.

@@ -220,21 +220,13 @@ def play(anime_id, episode_id):
     hostlink = videos[hostDialog]['url']
     hostquality = videos[hostDialog]['quality']
     embed_id = videos[hostDialog]['embed_id']
-	
-    c = cache.get(masterani.get_anime_details, 3, anime_id)
-    syn = c['plot'].encode('utf-8')
-    print syn
-    sty = c['premiered'].split("-", 1)[0]
-    print sty
-    gen = str(c['genre'])
-    print gen
 
     progressDialog.update(75, line1=l1, line3="Loading video.")
 	
     #Resolve Links
     mp4 = getdirect(hostname, hostlink, hostquality, embed_id)
     progressDialog.close()
-    MAPlayer().run(anime_id, ep_id, mp4, syn, sty, gen)
+    MAPlayer().run(anime_id, ep_id, mp4)
 
 class MAPlayer(xbmc.Player):
     def __init__(self):
@@ -242,7 +234,7 @@ class MAPlayer(xbmc.Player):
         self.anime_id = 0
         self.episode_id = 0
 
-    def run(self, anime_id, ep_id, url, synop, start, gen):
+    def run(self, anime_id, ep_id, url):
         control.sleep(200)
 
         self.anime_id = int(anime_id)
@@ -254,7 +246,7 @@ class MAPlayer(xbmc.Player):
             c = cache.get(masterani.get_anime_details, 3, self.anime_id)
 
             ctype = c['type']
-            ctype = 'movie' if int(ctype) is 2 else 'episode'
+            ctype = 'video' if int(ctype) is 2 else 'episode'
 
             tvshowtitle = c['title']
             poster = c['poster']
@@ -265,27 +257,8 @@ class MAPlayer(xbmc.Player):
 
             e = c['episodes'][self.episode_id]
             title = e['info']['title']
-            season2options = [' Season 2', ' 2nd Season', ' Second Season', ': Season 2', ': 2nd Season', ': Second Season', ' II', ': II']
-            season3options = [' Season 3', ' 3rd Season', ' Third Season', ': Season 3', ': 3rd Season', ': Third Season', ' III', ': III']
-            season4options = [' Season 4', ' 4th Season', ' Fourth Season', ': Season 4', ': 4th Season', ': Fourth Season', ' IV', ': IV']
-            season5options = [' Season 5', ' 5th Season', ' Fifth Season', ': Season 5', ': 5th Season', ': Fifth Season', ' V', ': V']
             season = 1
-            for option in season2options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 2
-            for option in season3options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 3
-            for option in season4options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 4
-            for option in season5options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 5
+            if season is None: season = 1
             episode = e['info']['episode']
             if ctype is 'video': title = c['title']
             if title is None: title = "Episode %s" % episode
@@ -294,20 +267,12 @@ class MAPlayer(xbmc.Player):
                          infoLabels={'tvshowtitle': title, 'title': tvshowtitle, 'episode': int(episode),
                                      'season': int(season), 'mediatype': ctype})
 									 
-            #year = e['info']['aired'].split("-", 1)[0]
-            #plot = e['info']['description']
+            year = e['info']['aired'].split("-", 1)[0]
+            plot = e['info']['description']
 
-            if 'movie' in ctype:
-                year = start
-                plot = synop
-                genre = gen
-                item.setInfo(type="video",
-                             infoLabels={'year': year, 'plot': plot, 'genre': genre})
-            else:   
-                year = e['info']['aired'].split("-", 1)[0]
-                plot = e['info']['description']			
-                item.setInfo(type="video",
-                             infoLabels={'year': year, 'plot': plot, 'genre': gen})
+            item.setInfo(type="video",
+                         infoLabels={'year': year, 'plot': plot})
+            
 
         except:
             pass
