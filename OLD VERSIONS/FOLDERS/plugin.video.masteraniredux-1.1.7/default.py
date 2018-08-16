@@ -92,25 +92,9 @@ elif action == 'search':
     from resources.lib.indexers import animeshows
     animeshows.Indexer().search(query)
 
-elif action == 'tools':
-    from resources.lib.indexers import tools
-    tools.tools()
-	
 elif action == 'clearCache':
     from resources.lib.modules import cache
     cache.cache_clear()
-	
-elif action == 'clearFavorites':
-    from resources.lib.modules import favorites
-    favorites.Favorites().clearFav()
-
-elif action == 'backUpFavorites':
-    from resources.lib.modules import favorites
-    favorites.Favorites().backup()
-	
-elif action == 'recoverFavorites':
-    from resources.lib.modules import favorites
-    favorites.Favorites().recover()
 
 elif action == "watched":
     from resources.lib.modules import watched

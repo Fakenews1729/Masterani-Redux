@@ -7,9 +7,13 @@
 		<setting id="trakt.token" type="text" option="hidden" visible="false" label="" default="" />
         <setting id="trakt.refresh" type="text" option="hidden" visible="false" label="" default="" />
 		<setting id="indicators.alt" type="enum" label="Indicators" values="Local|Trakt" default="1" visible="!eq(-3,)" />
-        <setting type="lsep" label="Kitsu"/>		
-		<setting id="kitsu.user" type="text" label="Username" default=""/>
-        <setting id="kitsu.pass" type="text" option="hidden" label="Password" default=""/>
+
+        <setting type="lsep" label="Empty Fancy Stuff"/>
+
+        <setting type="lsep" label="MyAnimeList" visible="false"/>
+        <setting id="mal.username" type="text" label="Username:" visible="false"/>
+        <setting id="mal.password" type="text" option="hidden" label="Password:" visible="false"/>
+
     </category>
     <category label="Hosts">
         <setting id="host.mp4upload" type="bool" label="MP4Upload" default="true" />
@@ -24,7 +28,7 @@
     </category>
     <category label="Playback">
         <setting type="lsep" label="Autoplay" />
-        <setting id="autoplay.enabled" label="Enable Autoplay" type="bool" default="false" />
+        <setting id="autoplay.enabled" label="Enabled" type="bool" default="false" />
         <setting id="autoplay.maxquality" label="Max Quality" type="select" values="1080|720|480" default="1080" />
         <setting id="autoplay.subdub" label="Sub | Dub" type="select" values="Sub|Dub" default="Sub" />
     </category>

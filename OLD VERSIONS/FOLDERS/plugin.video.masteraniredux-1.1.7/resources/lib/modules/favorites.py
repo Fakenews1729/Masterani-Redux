@@ -20,8 +20,6 @@ try:
     from sqlite3 import dbapi2 as database
 except:
     from pysqlite2 import dbapi2 as database
-	
-from shutil import copyfile
 
 from resources.lib.modules import control
 
@@ -69,23 +67,3 @@ class Favorites:
             return self.dbcur.fetchall()
         except:
             pass
-
-    def clearFav(self):
-        self.dbcur.execute("DELETE FROM favorites;")
-        self.dbcon.commit()		
-        control.refresh()
-			
-    def backup(self):
-        self.dbcur.execute("CREATE TABLE IF NOT EXISTS favorites_backup (""anime_id INTEGER, UNIQUE(anime_id) "");")	
-        self.dbcur.execute("DELETE FROM favorites_backup;")
-        self.dbcon.commit()		
-        self.dbcur.execute("INSERT INTO favorites_backup SELECT * FROM favorites;")
-        self.dbcon.commit()
-        control.refresh()
-
-    def recover(self):
-        self.dbcur.execute("DELETE FROM favorites;")
-        self.dbcon.commit()		
-        self.dbcur.execute("INSERT INTO favorites SELECT * FROM favorites_backup;")
-        self.dbcon.commit()		
-        control.refresh()

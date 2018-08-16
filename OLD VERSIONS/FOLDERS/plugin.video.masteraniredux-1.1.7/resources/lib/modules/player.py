@@ -30,7 +30,6 @@ from resources.lib.modules import control
 from resources.lib.modules import masterani
 from resources.lib.modules.control import progressDialog
 from resources.lib.modules.watched import Watched
-from resources.lib.modules import kitsu
 import resolveurl
 
 #GETLINKS
@@ -97,7 +96,6 @@ def getdirect(hostname, url, quality, embed_id):
 def play(anime_id, episode_id):
 
     episode_link = episode_id
-    episode_number = episode_link.split("/", 6)[6]
 	
     l1 = "Fetching video."
     progressDialog.create(heading="Masterani Redux", line1="Fetching video.")
@@ -230,14 +228,13 @@ def play(anime_id, episode_id):
     print sty
     gen = str(c['genre'])
     print gen
-    epcount = c['episode_count']
 
     progressDialog.update(75, line1=l1, line3="Loading video.")
 	
     #Resolve Links
     mp4 = getdirect(hostname, hostlink, hostquality, embed_id)
     progressDialog.close()
-    MAPlayer().run(anime_id, ep_id, mp4, syn, sty, gen, episode_number, epcount)
+    MAPlayer().run(anime_id, ep_id, mp4, syn, sty, gen)
 
 class MAPlayer(xbmc.Player):
     def __init__(self):
@@ -245,7 +242,7 @@ class MAPlayer(xbmc.Player):
         self.anime_id = 0
         self.episode_id = 0
 
-    def run(self, anime_id, ep_id, url, synop, start, gen, epnum, epcount):
+    def run(self, anime_id, ep_id, url, synop, start, gen):
         control.sleep(200)
 
         self.anime_id = int(anime_id)
@@ -318,8 +315,6 @@ class MAPlayer(xbmc.Player):
         item.setProperty('Video', 'true')
         item.setProperty('IsPlayable', 'true')
 
-        #kitsu.kitsu(tvshowtitle, epnum, epcount)
- 
         self.play(url, item)
 
         self.playback_checker()

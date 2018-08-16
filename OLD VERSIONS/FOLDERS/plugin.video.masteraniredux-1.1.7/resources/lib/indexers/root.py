@@ -57,8 +57,8 @@ def main_menu():
         {'name': "Search",
          'action': 'search'},
 
-        {'name': "Tools",
-         'action': "tools"}
+        {'name': "Clear Cache",
+         'action': "clearCache"}
     ]
     add_directory(items)
 

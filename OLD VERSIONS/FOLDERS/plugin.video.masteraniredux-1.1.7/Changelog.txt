@@ -1,12 +1,4 @@
-﻿[1.1.8] - 2018-08-16
-- Added a new tools menu that includes new troubleshooting options.
-- Moved Clear Cache to Tools.
-- Added a backup feature to Favorites within the Tools menu.
-- Added an option to clear favorites if you have issues within the Tools menu.
-- Added an option to restore favorites from a backup within the Tools menu.
-- Began work on automatic updating of a Kitsu library, doesn't work just yet, but take a look at the kitsu.py file if you want a sneak peek. When it is finished will update to 1.2.x. Which will focus on things like syncing, using services like Kitsu, Trakt and other similar things. Much like how 1.1.x focused on metadata and display options.
-
-[1.1.7] - 2018-08-14
+﻿[1.1.7] - 2018-08-14
 - Changed the screenshots to be from real anime (1. Mikakunin de Shinkoukei, 2. Toradora!, 3. Love Live! School Idol Project)
 - Fixed movie metadata so now it shows year, genre, and plot. 
 
