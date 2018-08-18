@@ -1,4 +1,7 @@
-﻿[1.1.8] - 2018-08-16
+﻿[1.1.9] - 2018-08-19
+- Fixed the sources as Masterani updated how they handle links.
+
+[1.1.8] - 2018-08-16
 - Added a new tools menu that includes new troubleshooting options.
 - Moved Clear Cache to Tools.
 - Added a backup feature to Favorites within the Tools menu.

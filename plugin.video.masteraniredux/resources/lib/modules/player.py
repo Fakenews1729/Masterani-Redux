@@ -36,9 +36,14 @@ import resolveurl
 #GETLINKS
 def getlinks(url):
     link_list = []	
+    link_list_id = []
     with requests.session() as s:
         p = s.get(url)
         print (p.text).encode('utf-8')
+        ep_id = (p.text).encode('utf-8').split('var args = { anime: {"info":{', 1)[1]
+        ep_id = ep_id.encode('utf-8').split('"id":', 2)[2]
+        ep_id = ep_id.encode('utf-8').split(',', 1)[0]
+        print ep_id
         try:
             videos = re.findall(r'videos = (\[.*?\])', p.text)[0]
             print videos
@@ -50,12 +55,16 @@ def getlinks(url):
                 embed_id = 'None Required' #Literally only got this part to fix an error
                 link_list.append({'url': i['src'], 'name': 'Aika', 'quality': i['res'], 'type': type, 'embed_id': embed_id})
         except:
-            mirrors = re.findall(r'mirrors: (.*?), auto_update', p.text)[0]
+            #mirrors = re.findall(r"mirrors= (.*?), auto_update", p.text)[0]
+            mirrors = (p.text).split("<video-mirrors :mirrors='", 1)[1]
+            mirrors = mirrors.split("'></video-mirrors>", 1)[0]
             mirrors = json.loads(mirrors)
             for i in mirrors:
                 link_list.append({'embed_id':i['embed_id'],'url': i['host']['embed_prefix'] + i['embed_id'], 'name': i['host']['name'], 'quality': i['quality'], 'type': i['type']})
     print link_list
-    return link_list
+    link_list_id.append(link_list)
+    link_list_id.append(ep_id)
+    return link_list_id
 
 def getid(url):
     with requests.session() as s:
@@ -103,10 +112,10 @@ def play(anime_id, episode_id):
     progressDialog.create(heading="Masterani Redux", line1="Fetching video.")
     progressDialog.update(0, line1=l1, line3="Loading hosts.")
     
-    hosts = getlinks(episode_link)   
-    ep_id = getid(episode_link)
+    hosts = getlinks(episode_link)[0]   
+    ep_id = getlinks(episode_link)[1]
     #linkforcover = getcover(episode_link)
-	
+
     if hosts is None:
         xbmcgui.Dialog().ok("Masterani Redux", "Something went wrong.", "Please try again later.")
         return
