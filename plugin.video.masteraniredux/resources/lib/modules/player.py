@@ -277,27 +277,29 @@ class MAPlayer(xbmc.Player):
 
             e = c['episodes'][self.episode_id]
             title = e['info']['title']
-            season2options = [' Season 2', ' 2nd Season', ' Second Season', ': Season 2', ': 2nd Season', ': Second Season', ' II', ': II']
-            season3options = [' Season 3', ' 3rd Season', ' Third Season', ': Season 3', ': 3rd Season', ': Third Season', ' III', ': III']
-            season4options = [' Season 4', ' 4th Season', ' Fourth Season', ': Season 4', ': 4th Season', ': Fourth Season', ' IV', ': IV']
-            season5options = [' Season 5', ' 5th Season', ' Fifth Season', ': Season 5', ': 5th Season', ': Fifth Season', ' V', ': V']
+            season2options = [' Season 2', ' 2nd Season', ' Second Season', ': Season 2', ': 2nd Season', ': Second Season', ' II ', ': II ']
+            season3options = [' Season 3', ' 3rd Season', ' Third Season', ': Season 3', ': 3rd Season', ': Third Season', ' III ', ': III ']
+            season4options = [' Season 4', ' 4th Season', ' Fourth Season', ': Season 4', ': 4th Season', ': Fourth Season', ' IV ', ': IV ']
+            season5options = [' Season 5', ' 5th Season', ' Fifth Season', ': Season 5', ': 5th Season', ': Fifth Season', ' V ', ': V ']
             season = 1
-            for option in season2options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 2
-            for option in season3options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 3
-            for option in season4options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 4
-            for option in season5options:
-                if option in tvshowtitle:
-                    tvshowtitle = tvshowtitle.replace(option, "")
-                    season = 5
+            if ctype = 'episode':
+                if "Lupin III" not in tvshowtitle:
+                    for option in season2options:
+                        if option in tvshowtitle:
+                            tvshowtitle = tvshowtitle.replace(option, "")
+                            season = 2
+                    for option in season3options:
+                        if option in tvshowtitle:
+                            tvshowtitle = tvshowtitle.replace(option, "")
+                            season = 3
+                    for option in season4options:
+                        if option in tvshowtitle:
+                            tvshowtitle = tvshowtitle.replace(option, "")
+                            season = 4
+                    for option in season5options:
+                        if option in tvshowtitle:
+                            tvshowtitle = tvshowtitle.replace(option, "")
+                            season = 5
             episode = e['info']['episode']
             if ctype is 'video': title = c['title']
             if title is None: title = "Episode %s" % episode

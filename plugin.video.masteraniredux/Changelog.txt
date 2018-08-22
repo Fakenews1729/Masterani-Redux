@@ -1,5 +1,6 @@
 ﻿[1.1.10] - 2018-08-22
 - The add-on is now fully compatible with Kodi 18 Leia for now (At least for the time being, let's hope nothing changes). Thanks to Munch (xMunchWasTaken) for this fix.
+- Small change to fix metadata error with movies as well as Lupin the Third (Displayed as "LupinI" in player rather than "Lupin III"
 
 [1.1.9] - 2018-08-19
 - Fixed the sources as Masterani updated how they handle links.
