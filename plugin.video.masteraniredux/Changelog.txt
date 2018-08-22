@@ -1,4 +1,7 @@
-﻿[1.1.9] - 2018-08-19
+﻿[1.1.10] - 2018-08-22
+- The add-on is now fully compatible with Kodi 18 Leia for now (At least for the time being, let's hope nothing changes). Thanks to Munch (xMunchWasTaken) for this fix.
+
+[1.1.9] - 2018-08-19
 - Fixed the sources as Masterani updated how they handle links.
 
 [1.1.8] - 2018-08-16
@@ -14,7 +17,7 @@
 - Fixed movie metadata so now it shows year, genre, and plot. 
 
 [1.1.6] - 2018-08-12
-- Removed Aniupload, Bakavideo and Beta hosts as they are no longer on Masterani. Thanks to xMunchWasTaken for this information.
+- Removed Aniupload, Bakavideo and Beta hosts as they are no longer on Masterani. Thanks to Munch (xMunchWasTaken) for this information.
 
 [1.1.5] - 2018-08-11
 - Fixes the add-on for Kodi 18 Leia

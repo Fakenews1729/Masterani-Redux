@@ -7,9 +7,13 @@
 		<setting id="trakt.token" type="text" option="hidden" visible="false" label="" default="" />
         <setting id="trakt.refresh" type="text" option="hidden" visible="false" label="" default="" />
 		<setting id="indicators.alt" type="enum" label="Indicators" values="Local|Trakt" default="1" visible="!eq(-3,)" />
-        <setting type="lsep" label="Kitsu"/>		
-		<setting id="kitsu.user" type="text" label="Username" default=""/>
+        <setting type="lsep" label="Kitsu"/>
+        <setting id="kitsu.yesno" type="bool" label="Use Kitsu?" default="false"/>        		
+		<setting id="kitsu.user" type="text" label="Email" default=""/>
         <setting id="kitsu.pass" type="text" option="hidden" label="Password" default=""/>
+		<setting id="kitsu.auth" type="action" label="Authorize" option="close" action="RunPlugin(plugin://plugin.video.masterani/?action=authKitsu)"/>
+        <setting id="kitsu.userid" type="number" default="0"/>
+        <setting id="kitsu.token" type="text" default=""/>        
     </category>
     <category label="Hosts">
         <setting id="host.mp4upload" type="bool" label="MP4Upload" default="true" />

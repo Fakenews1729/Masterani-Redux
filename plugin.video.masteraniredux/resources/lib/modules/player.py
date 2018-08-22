@@ -327,8 +327,13 @@ class MAPlayer(xbmc.Player):
         item.setProperty('Video', 'true')
         item.setProperty('IsPlayable', 'true')
 
-        #kitsu.kitsu(tvshowtitle, epnum, epcount)
- 
+        #kitsuyesno = control.setting("kitsu.yesno")
+        #try:
+            #if kitsuyesno = "true":
+                #kitsu.kitsu(tvshowtitle, epnum, epcount)
+        #except:
+            #pass
+
         self.play(url, item)
 
         self.playback_checker()

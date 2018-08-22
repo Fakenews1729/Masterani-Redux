@@ -19,7 +19,7 @@
 import json
 import random
 import sys
-
+import urllib
 import xbmc
 import xbmcgui
 from resources.lib.indexers import root
@@ -81,11 +81,10 @@ class Indexer:
         if offset > 1:
             offset_string = "&page=" + str(offset)
 
-        sort_string = ""
+        sort_string = "score_desc"
+        sort = str(sort)
         if sort is '0':
             sort_string = "score"
-        if sort is '1':
-            sort_string = "score_desc"
         if sort is '2':
             sort_string = "title"
         if sort is '3':
@@ -94,8 +93,8 @@ class Indexer:
         sort_string = "order="+sort_string
 
         try:
+            genre = urllib.unquote(genre)
             genre = eval(genre)
-
         except:
             pass
 

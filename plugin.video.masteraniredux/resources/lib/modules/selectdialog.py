@@ -189,11 +189,11 @@ class SelectDialog(pyxbmct.AddonDialogWindow):
         super(SelectDialog, self).close()
         #seltype = urllib.quote_plus("%s" % seltype)
         selgenre = urllib.quote_plus("%s" % selgenre)
-        url = '&stype=%s&sort=%s&status=%s&genre=%s' % (seltype, selsort, selstatus, selgenre)
-        runstring = 'Container.Update(%s?action=get_by_select' % sys.argv[0] + url + ')'
-        print runstring
-        xbmc.executebuiltin(runstring)
-        # self.callback(seltype, selsort, selstatus, selgenre)
+        #url = '&stype=%s&sort=%s&status=%s&genre=%s' % (seltype, selsort, selstatus, selgenre)
+        #runstring = 'Container.Update(%s?action=get_by_select' % sys.argv[0] + url + ')'
+        #print runstring
+        #xbmc.executebuiltin(runstring)
+        self.callback(seltype, selsort, selstatus, selgenre)
 
     def close(self):
         self.selected = []

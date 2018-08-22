@@ -2,43 +2,28 @@ from resources.lib.modules import control
 import requests
 import time
 
-username = control.setting("kitsu.user")
+email = control.setting("kitsu.user")
 password = control.setting("kitsu.pass")
 client_id = 'dd031b32d2f56c990b1425efe6c42ad847e7fe3ab46bf1299f05ecd856bdb7dd'
 client_secret = '54d7307928f63414defd96399fc31ba847961ceaecef3a5fd93144e960c0e151'
 
 def auth():
-    header = {
-        'User-Agent': 'Pymoe (git.vertinext.com/ccubed/Pymoe)',
-        'Accept': 'application/vnd.api+json',
-        'Content-Type': 'application/vnd.api+json'
-        }
-    token = requests.post("https://kitsu.io/api/oauth/token",
-                          params={"grant_type": "password", "username": username, "password": password,
-                                  "client_id": client_id, "client_secret": client_secret})
-    print token
-    jsd = token.json()
-    at = jsd['access_token']
-    ex = int(jsd['expires_in'])
-    cr = int(jsd['created_at'])
-    re = jsd['refresh_token']
-    authorization = "'" + str("Bearer " + str(at)) + "'"
-    header = {
-        'User-Agent': 'Pymoe (git.vertinext.com/ccubed/Pymoe)',
-        'Accept': 'application/vnd.api+json',
-        'Content-Type': 'application/vnd.api+json',
-        'Authorization': authorization
-        }
-    authinfo = [header, ex, cr, re]
-    return authinfo
+    email = control.setting("kitsu.user")
+    password = control.setting("kitsu.pass")
+    resp = requests.post("https://kitsu.io/api/oauth/token",
+                          params={"grant_type": "password", "username": email, "password": password})
+    print resp
+    token = json.loads(resp.text)['access_token']
+    control.setSetting("kitsu.token", token)
+    useridScrobble_resp = requests.get('https://kitsu.io/api/edge/users?filter[self]=true', headers=kitsu_headers())
+    userid = json.loads(useridScrobble_resp.text)['data'][0]['id']
+    control.setSetting("kitsu.userid", userid) 
 
-def update(info, anidetails, id):
-    header = info[0]
-    date = info[2]    
-    animeid = id[1]
+def update(anidetails, id):
+    anime_id = id
     episodenumber = anidetails[0]
     episodecount = anidetails[1] 
-    user_id = id[0]
+    user_id = int(control.getSetting("kitsu.userid"))
     item_type = 'anime'	
     if episodenumber < episodecount:
         update = ['current', episodenumber]
@@ -60,27 +45,20 @@ def update(info, anidetails, id):
                 },
                 "media":{
                     "data":{
-                        "id": animeid,
+                        "id": anime_id,
                         "kind": item_type
                         }
                     }
                 }
             }
         }
-    send = requests.post("https://kitsu.io/api/edge/library-entries", json=final_dict, headers=header)
+    data = json.dumps(final_dict, separators=(',',':'))
+    send = requests.post("https://kitsu.io/api/edge/library-entries", headers=kitsu_headers(), data=data)
     print send
     return True
 
 def getID(showtitle):
-    header = {
-        'User-Agent': 'Pymoe (git.vertinext.com/ccubed/Pymoe)',
-        'Accept': 'application/vnd.api+json',
-        'Content-Type': 'application/vnd.api+json'
-        }
-    userid = requests.get("https://kitsu.io/api/edge/users", params={"filter[name]": username}, headers=header)
-    userid = json.loads(userid)
-    userid = userid[data][id]
-    showid = requests.get("https://kitsu.io/api/edge/anime", params={"filter[text]": showtitle[1]}, headers=header)
+    showid = requests.get("https://kitsu.io/api/edge/anime", params={"filter[text]": showtitle[1]}, headers=kitsu_headers())
     showid = json.loads(showid)
     data = showid[data]
     count = 0
@@ -88,20 +66,24 @@ def getID(showtitle):
         if data[canonicalTitle] == showtitle[0]:
             showid = data[id]
         count = count + 1
-    print userid
-    print showid
-    id = [userid, showid]	
+    return showid
 
 def kitsu(showtitle, epnum, epcount):
-    if username is None:
-        return
-    token = auth()
     title = showtitle
     search_term = title.replace(" ", "%20")
     show = [title, search_term]
-    id = getID(show)
+    showid = getID(show)
     anidetails = [epnum, epcount]
-    update(token, anidetails, id) 
+    update(anidetails, showid) 
+
+def kitsu_headers(self):
+    token = control.setting("kitsu.token")
+    headers = {
+        'Content-Type': 'application/vnd.api+json',
+        'Accept': 'application/vnd.api+json',
+        'Authorization': "Bearer {}".format(token),
+        }
+    return headers
     
 
     

@@ -131,3 +131,7 @@ elif action == "favorites":
 elif action == 'authTrakt':
     from resources.lib.modules import trakt
     trakt.authTrakt()
+
+elif action == 'authKitsu':
+    from resources.lib.modules import kitsu
+    kitsu.auth()
