@@ -25,7 +25,6 @@
 		<setting id="host.aika" type="bool" label="Aika" default="true" />
 		<setting id="host.streamango" type="bool" label="Streamango" default="true" />
         <setting id="host.openload" type="bool" label="Openload" default="true" />
-        <setting id="host.mystream" type="bool" label="Mystream" default="true" />	
     </category>
     <category label="Playback">
         <setting type="lsep" label="Autoplay" />

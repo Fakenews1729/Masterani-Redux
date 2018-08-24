@@ -157,9 +157,9 @@ class Indexer:
                     playcount = 0
 
                 if episodetitle is not None:
-                    label = "%s - %s - %s" % (tvshowtitle, int(episode), episodetitle)
+                    label = "%s - %sx%s - %s" % (tvshowtitle, int(season), int(episode), episodetitle)
                 else:
-                    label = "%s - %s" % (tvshowtitle, int(episode))
+                    label = "%s - %sx%s" % (tvshowtitle, int(season), int(episode))
 
                 item = control.item(label=label)
 

@@ -96,17 +96,10 @@ def getdirect(hostname, url, quality, embed_id):
             dialog.notification("ResolveURL Error", message, xbmcgui.NOTIFICATION_INFO, duration)
         else:        
             mp4 = stream_url
-#TO BE REMOVED SOON
     if 'Aika' in hostname:
         mp4 = url
     if 'Streamango' in hostname:
         mp4 = resolveurl.resolve(url)
-    if 'Mystream' in hostname:
-        link = requests.get(url)
-        link = (link.text).encode('utf-8')
-        link = link.split('<source src="', 1)[1]
-        link = link.split('" type="video/mp4"', 1)[0]
-        mp4 = link
     mp4 = str(mp4)
     return mp4
 
@@ -135,11 +128,6 @@ def play(anime_id, episode_id):
             hosts.remove(e)
 
     #Remove Disabled Hosts
-
-    if control.setting("host.mystream") == "false":
-            for e in hosts:
-                if 'Mystream' in e['name']:
-                    hosts.remove(e)
 
     if control.setting("host.mp4upload") == "false":
             for e in hosts:
