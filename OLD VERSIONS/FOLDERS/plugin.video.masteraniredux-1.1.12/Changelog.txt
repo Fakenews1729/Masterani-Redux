@@ -1,7 +1,4 @@
-﻿[1.1.13] - 2018-08-25
-- Miscellaneous changes
-
-[1.1.12] - 2018-08-24
+﻿[1.1.12] - 2018-08-24
 - Masterani added a new host!!! Mystream.to is now working.
 
 [1.1.11] - 2018-08-22
