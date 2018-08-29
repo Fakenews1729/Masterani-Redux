@@ -51,7 +51,7 @@ class Indexer:
     def get(self, url):
         try:
             self.list = self.get_list(url)
-            #self.worker()
+            self.worker()
             self.add_directory(self.list)
             return self.list
         except:
@@ -134,7 +134,7 @@ class Indexer:
         self.list = masterani.extract_data_from_filter_list(result)
 
         if len(self.list) is 0:
-            xbmcgui.Dialog().notification("Masterani Redux", "No anime found. Try other options.")
+            xbmcgui.Dialog().ok("Masterani Redux", "No anime found.", "Try other options.")
             return
 
         self.last_page = result['last_page']
@@ -185,22 +185,17 @@ class Indexer:
 
         if self.query is None or self.query is '': return
 
-        result = client.request("https://www.masterani.me/api/anime/filter?search=%s&order=relevance_desc&page=1&detailed=1" % self.query)
-        try:
-            result = json.loads(result)
-            result = result['data']
-        except:
-            xbmcgui.Dialog().notification("Masterani Redux", "No results for \"%s\"." % self.query)
+        result = client.request("http://www.masterani.me/api/anime/search?search=%s&sb=true" % self.query)
+        result = json.loads(result)
 
         print result
 
-        if len(result) is 0:
-            return        
-        
-        items = masterani.extract_data_from_filter_list(result)
+        if len(result) is 0: return
 
-        #self.worker()
-        self.add_directory(items)
+        for i in result: self.list.append({'anime_id': i['id'], 'status': 1})
+
+        self.worker()
+        self.add_directory(self.list)
 
     def worker(self):
         try:
