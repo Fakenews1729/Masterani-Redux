@@ -185,9 +185,10 @@ class Indexer:
 
         if self.query is None or self.query is '': return
 
-        result = client.request("https://www.masterani.me/api/anime/filter?search=%s&order=relevance_desc&page=1&detailed=1" % self.query.replace(" ", "%20"))
+        result = client.request("https://www.masterani.me/api/anime/filter?search=%s&order=relevance_desc&page=1&detailed=1" % self.query)
         try:
             result = json.loads(result)
+            result = result['data']
         except:
             xbmcgui.Dialog().notification("Masterani Redux", "No results for \"%s\"." % self.query)
 

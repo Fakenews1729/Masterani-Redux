@@ -1,7 +1,4 @@
-﻿[1.1.17] - 2018-08-29
-- I'm an idiot and broke search I fixed it now.
-
-[1.1.16] - 2018-08-29
+﻿[1.1.16] - 2018-08-29
 - Over the past few updates I have been implementing changes that makes the add-on run quicker, it's now easier on your system, and Masterani. Anyway now search is quicker. Go nuts!
 - Added a small change that tells you when there is no results in a search.
 
