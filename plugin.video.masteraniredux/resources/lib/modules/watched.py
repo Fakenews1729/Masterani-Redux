@@ -24,7 +24,6 @@ except:
 from resources.lib.modules import cache
 from resources.lib.modules import control
 from resources.lib.modules import masterani
-from resources.lib.modules import kitsu
 
 
 class Watched:
@@ -43,14 +42,7 @@ class Watched:
             if int(episode_id) == -999:
                 if unmark is None:
                     result = cache.get(masterani.get_anime_details, 1, anime_id)
-                    name = result['title']
                     episodes = result['episodes'] if 'episodes' in result else ''
-                    count = 0
-                    for epnum in episodes:
-                        count = count + 1
-                        if episode_id == episodes['info']['id']:
-                            episodenum = count
-                    episode_count = result['episode_count']
                     for e in episodes:
                         self.dbcur.execute("INSERT OR IGNORE INTO watched VALUES (?, ?)", (anime_id, e))
                 else:

@@ -96,7 +96,7 @@ def getdirect(hostname, url, quality, embed_id):
             dialog.notification("ResolveURL Error", message, xbmcgui.NOTIFICATION_INFO, duration)
         else:        
             mp4 = stream_url
-    #TO BE REMOVED SOON
+#TO BE REMOVED SOON
     if 'Aika' in hostname:
         mp4 = url
     if 'Streamango' in hostname:
@@ -140,7 +140,6 @@ def play(anime_id, episode_id):
     if hosts is None:
         xbmcgui.Dialog().ok("Masterani Redux", "Something went wrong.", "Please try again later.")
         return
-
 
     #Remove Disabled Hosts
 
@@ -192,6 +191,11 @@ def play(anime_id, episode_id):
     if control.setting("host.openload") == "false":
         for e in hosts:
             if 'Openload' in e['name']:
+                hosts.remove(e)
+                
+    if control.setting("host.tiwikiwi") == "false":
+        for e in hosts:
+            if 'Streamango' in e['name']:
                 hosts.remove(e)
 
     progressDialog.update(25, line1=l1, line3="Loading episodes urls.")

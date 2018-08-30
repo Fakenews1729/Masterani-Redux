@@ -33,7 +33,7 @@ def get_anime_details(anime_id):
     # print "Getting anime details: %s" % url
     try:
         result = client.request("http://www.masterani.me/api/anime/%s/detailed" % anime_id, timeout=60)
-        result = json.loads(result.read())
+        result = json.loads(result)
 
         info = result['info']
 
