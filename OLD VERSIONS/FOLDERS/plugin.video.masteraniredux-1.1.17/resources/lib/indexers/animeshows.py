@@ -129,7 +129,7 @@ class Indexer:
         url = self.filterurl + sort_string + status_string + type_string + genre_string + "&detailed=1" + offset_string
         print url
         result = client.request(url)
-        result = json.loads(result.read())
+        result = json.loads(result)
 
         self.list = masterani.extract_data_from_filter_list(result)
 
@@ -165,7 +165,7 @@ class Indexer:
 
     def get_popular(self):
         result = client.request("https://www.masterani.me/api/anime/trending/now?detailed=1")
-        result = json.loads(result.read())
+        result = json.loads(result)
 
         print result
 
@@ -187,7 +187,7 @@ class Indexer:
 
         result = client.request("https://www.masterani.me/api/anime/filter?search=%s&order=relevance_desc&page=1&detailed=1" % self.query.replace(" ", "%20"))
         try:
-            result = json.loads(result.read())
+            result = json.loads(result)
         except:
             xbmcgui.Dialog().notification("Masterani Redux", "No results for \"%s\"." % self.query)
 
@@ -237,7 +237,7 @@ class Indexer:
         except:
             return
 
-        result = json.loads(result.read())
+        result = json.loads(result)
 
         for item in result:
             title = item['anime']['title']

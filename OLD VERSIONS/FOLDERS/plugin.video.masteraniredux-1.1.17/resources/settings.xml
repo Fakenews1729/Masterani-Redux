@@ -2,19 +2,18 @@
 <settings>
 	<category label="General">
         <setting id="anime.lastvisited" type="number" default="0" visible="false" />
-        <setting type="lsep" label="Super secret fancy stuff that will be added later..." />
-        <setting type="lsep" label="Trakt" visible="false" />
-		<setting id="trakt.user" type="action" label="Authorization..." option="close" action="RunPlugin(plugin://plugin.video.masterani/?action=authTrakt)" visible="false" />
-		<setting id="trakt.token" type="text" option="hidden" visible="false" label="" default=""  visible="false" />
-        <setting id="trakt.refresh" type="text" option="hidden" visible="false" label="" default=""  visible="false" />
+        <setting type="lsep" label="Trakt" />
+		<setting id="trakt.user" type="action" label="Authorization..." option="close" action="RunPlugin(plugin://plugin.video.masterani/?action=authTrakt)" />
+		<setting id="trakt.token" type="text" option="hidden" visible="false" label="" default="" />
+        <setting id="trakt.refresh" type="text" option="hidden" visible="false" label="" default="" />
 		<setting id="indicators.alt" type="enum" label="Indicators" values="Local|Trakt" default="1" visible="!eq(-3,)" />
-        <setting type="lsep" label="Kitsu" visible="false" />
-        <setting id="kitsu.yesno" type="bool" label="Use Kitsu?" default="false" visible="false" />        		
-		<setting id="kitsu.user" type="text" label="Email" default="" visible="false" />
-        <setting id="kitsu.pass" type="text" option="hidden" label="Password" default="" visible="false" />
-		<setting id="kitsu.auth" type="action" label="Authorize" option="close" action="RunPlugin(plugin://plugin.video.masterani/?action=authKitsu)" visible="false" />
-        <setting id="kitsu.userid" type="number" default="0" visible="false" />
-        <setting id="kitsu.token" type="text" default="" visible="false" />        
+        <setting type="lsep" label="Kitsu"/>
+        <setting id="kitsu.yesno" type="bool" label="Use Kitsu?" default="false"/>        		
+		<setting id="kitsu.user" type="text" label="Email" default=""/>
+        <setting id="kitsu.pass" type="text" option="hidden" label="Password" default=""/>
+		<setting id="kitsu.auth" type="action" label="Authorize" option="close" action="RunPlugin(plugin://plugin.video.masterani/?action=authKitsu)"/>
+        <setting id="kitsu.userid" type="number" default="0"/>
+        <setting id="kitsu.token" type="text" default=""/>        
     </category>
     <category label="Hosts">
         <setting id="host.mp4upload" type="bool" label="MP4Upload" default="true" />

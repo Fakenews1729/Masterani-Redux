@@ -3,7 +3,6 @@ import requests
 import time
 
 email = control.setting("kitsu.user")
-name = control.setting("kitsu.name")
 password = control.setting("kitsu.pass")
 client_id = 'dd031b32d2f56c990b1425efe6c42ad847e7fe3ab46bf1299f05ecd856bdb7dd'
 client_secret = '54d7307928f63414defd96399fc31ba847961ceaecef3a5fd93144e960c0e151'
@@ -16,7 +15,7 @@ def auth():
     print resp
     token = json.loads(resp.text)['access_token']
     control.setSetting("kitsu.token", token)
-    useridScrobble_resp = requests.get('https://kitsu.io/api/edge/users?filter[name]=%s' % name, headers=kitsu_headers())
+    useridScrobble_resp = requests.get('https://kitsu.io/api/edge/users?filter[self]=true', headers=kitsu_headers())
     userid = json.loads(useridScrobble_resp.text)['data'][0]['id']
     control.setSetting("kitsu.userid", userid) 
 
@@ -79,17 +78,11 @@ def kitsu(showtitle, epnum, epcount):
 
 def kitsu_headers(self):
     token = control.setting("kitsu.token")
-    if not token:
-        headers = {
-            'Content-Type': 'application/vnd.api+json',
-            'Accept': 'application/vnd.api+json'
+    headers = {
+        'Content-Type': 'application/vnd.api+json',
+        'Accept': 'application/vnd.api+json',
+        'Authorization': "Bearer {}".format(token),
         }
-    else:
-        headers = {
-            'Content-Type': 'application/vnd.api+json',
-            'Accept': 'application/vnd.api+json',
-            'Authorization': "Bearer {}".format(token),
-            }
     return headers
     
 

@@ -96,7 +96,7 @@ def getdirect(hostname, url, quality, embed_id):
             dialog.notification("ResolveURL Error", message, xbmcgui.NOTIFICATION_INFO, duration)
         else:        
             mp4 = stream_url
-    #TO BE REMOVED SOON
+#TO BE REMOVED SOON
     if 'Aika' in hostname:
         mp4 = url
     if 'Streamango' in hostname:
@@ -107,20 +107,6 @@ def getdirect(hostname, url, quality, embed_id):
         link = link.split('<source src="', 1)[1]
         link = link.split('" type="video/mp4"', 1)[0]
         mp4 = link
-    if 'Tiwi.kiwi' in hostname:
-        viewpage = client.request("https://tiwi.kiwi/" + embed_id + "#")
-        hashsnip = re.compile("(?<=\,\\')(.*)(?=\\')").findall(viewpage)[0] # find hash
-        qualitynum = "o" # original
-        if quality is 720:
-            qualitynum = "n" # normal (720p)
-        elif quality is 480:
-            qualitynum = "l" # low (480p)
-        urlsnip = "dl?op=download_orig&id=" + embed_id + "&mode=" + qualitynum + "&hash=" + hashsnip
-        downloadpage = client.request("https://tiwi.kiwi/" +urlsnip)
-        mp4Raw = re.compile("href=\"(.+?mp4)").findall(downloadpage)[0]
-        try: from urllib import quote
-        except: pass
-        mp4 = quote(mp4Raw, safe="%/:=&?~#+!$,;'@()*[]")
     mp4 = str(mp4)
     return mp4
 
@@ -141,6 +127,12 @@ def play(anime_id, episode_id):
         xbmcgui.Dialog().ok("Masterani Redux", "Something went wrong.", "Please try again later.")
         return
 
+		
+    #Remove Tiwi Kiwi as it is broken
+	
+    for e in hosts:
+        if 'Tiwi.kiwi' in e['name']:
+            hosts.remove(e)
 
     #Remove Disabled Hosts
 

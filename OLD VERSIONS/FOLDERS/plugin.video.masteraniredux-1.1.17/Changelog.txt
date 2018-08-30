@@ -1,8 +1,4 @@
-﻿[1.1.18] - 2018-08-30
-- Tiwi Kiwi now works baybay. (HUGE thank you to CandyFace. He is the real MVP.)
-- Fixed an error that caused json to sometimes fail.
-
-[1.1.17] - 2018-08-29
+﻿[1.1.17] - 2018-08-29
 - I'm an idiot and broke search I fixed it now.
 
 [1.1.16] - 2018-08-29
