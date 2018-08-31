@@ -1,4 +1,7 @@
-﻿[1.1.19] - 2018-08-31
+﻿[1.1.20] - 2018-08-31
+- Fix for Rapidvideo after they updated and broke the resolver. When JSergio fixes this issue I will roll back to using ResolveURL for it.
+
+[1.1.19] - 2018-08-31
 - hehe... so the last update kind of broke everything... lol... so anyway I rolled back the json changes but kept the tiwi kiwi update.
 
 [1.1.18] - 2018-08-30

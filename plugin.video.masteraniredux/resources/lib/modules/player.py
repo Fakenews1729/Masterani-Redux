@@ -88,14 +88,11 @@ def getdirect(hostname, url, quality, embed_id):
     if 'Drive.g' in hostname:
         mp4 = resolveurl.resolve(url)
     if 'Rapidvideo' in hostname:
-        duration=10000  
-        message = "Cannot Play URL"
-        stream_url = resolveurl.HostedMediaFile(url=url).resolve()
-        if not stream_url:
-            dialog = xbmcgui.Dialog()
-            dialog.notification("ResolveURL Error", message, xbmcgui.NOTIFICATION_INFO, duration)
-        else:        
-            mp4 = stream_url
+        rv = requests.get(url + '&q=%sp' % quality)
+        link = (rv.text).encode('utf-8')
+        link = link.split('<source src="', 1)[1]
+        link = link.split('" type="video/mp4"', 1)[0]
+        mp4 = link
 #TO BE REMOVED SOON
     if 'Aika' in hostname:
         mp4 = url
