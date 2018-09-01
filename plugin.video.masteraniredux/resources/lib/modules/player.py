@@ -33,6 +33,8 @@ from resources.lib.modules.watched import Watched
 from resources.lib.modules import kitsu
 import resolveurl
 
+count = 0
+
 #GETLINKS
 def getlinks(url):
     link_list = []	
@@ -93,7 +95,7 @@ def getdirect(hostname, url, quality, embed_id):
         link = link.split('<source src="', 1)[1]
         link = link.split('" type="video/mp4"', 1)[0]
         mp4 = link
-#TO BE REMOVED SOON
+    #AIKA TO BE REMOVED SOON
     if 'Aika' in hostname:
         mp4 = url
     if 'Streamango' in hostname:
@@ -123,6 +125,9 @@ def getdirect(hostname, url, quality, embed_id):
 
 def play(anime_id, episode_id):
 
+    global count
+    count = count + 1
+    
     episode_link = episode_id
     episode_number = episode_link.split("/", 6)[6]
 	
@@ -210,27 +215,48 @@ def play(anime_id, episode_id):
     videoCounter = 0
     autoplayHost = 0
     hostCounter = 0
+    
+    autovids = []
+    
 
-    while videoCounter < len(videos):
+#    while videoCounter < len(videos):
+#        try:
+#            hostname = videos[videoCounter]['name']
+#            subs = 'Sub' if videos[videoCounter]['type'] is 1 else 'Dub'
+#            quality = videos[videoCounter]['quality']
+#            if 'true' in autoplay:
+#                if subdub == subs and int(quality) <= int(maxq):
+#                    hostlist.append("%s | %s | %s" % (quality, subs, hostname))
+#                    autoplayHost = hostCounter
+#                    break
+#                hostCounter += 1
+#            else:
+#                hostlist.append("%s | %s | %s" % (quality, subs, hostname))
+#            videoCounter += 1
+#        except:
+#            videos.remove(videos[videoCounter])
+
+
+    while videoCounter < len(videos):      
         try:
             hostname = videos[videoCounter]['name']
             subs = 'Sub' if videos[videoCounter]['type'] is 1 else 'Dub'
             quality = videos[videoCounter]['quality']
             if 'true' in autoplay:
                 if subdub == subs and int(quality) <= int(maxq):
-                    hostlist.append("%s | %s | %s" % (quality, subs, hostname))
-                    autoplayHost = hostCounter
-                    break
-                hostCounter += 1
+                    hostlist.append("%s | %s | %s" % (quality, subs, hostname))    
+                    autovids.append(videos[videoCounter])                
             else:
                 hostlist.append("%s | %s | %s" % (quality, subs, hostname))
             videoCounter += 1
         except:
             videos.remove(videos[videoCounter])
 
+
+            
     if len(hostlist) is 0:
         progressDialog.close()
-        xbmcgui.Dialog().ok("Masterani Redux", "No supported hosts found.")
+        xbmcgui.Dialog().notification("Masterani Redux", "No supported hosts found.")
         return
 
     if 'false' in autoplay:
@@ -238,20 +264,29 @@ def play(anime_id, episode_id):
     else:
         if len(hostlist) is 0:
             progressDialog.close()
-            xbmcgui.Dialog().ok("Masterani Redux", "No hosts found for autoplay.", "Change addon settings and try again.")
+            xbmcgui.Dialog().notification("Masterani Redux", "No hosts found for autoplay. Change addon settings and try again.")
             hostDialog = -1
         else:
-            hostDialog = autoplayHost
+            hostDialog = count
 			
     if hostDialog == -1:
         progressDialog.close()
         control.execute('dialog.close(okdialog)')
         return
 
-    hostname = videos[hostDialog]['name']		
-    hostlink = videos[hostDialog]['url']
-    hostquality = videos[hostDialog]['quality']
-    embed_id = videos[hostDialog]['embed_id']
+    if 'true' in autoplay:
+        try:
+            hostname = autovids[hostDialog]['name']		
+            hostlink = autovids[hostDialog]['url']
+            hostquality = autovids[hostDialog]['quality']
+            embed_id = autovids[hostDialog]['embed_id']   
+        except:
+            xbmcgui.Dialog().notification("Masterani Redux", "You have attempted all the hosts")
+    else:        
+        hostname = videos[hostDialog]['name']		
+        hostlink = videos[hostDialog]['url']
+        hostquality = videos[hostDialog]['quality']
+        embed_id = videos[hostDialog]['embed_id']
 	
     c = cache.get(masterani.get_anime_details, 3, anime_id)
     syn = c['plot'].encode('utf-8')
@@ -267,7 +302,7 @@ def play(anime_id, episode_id):
     #Resolve Links
     mp4 = getdirect(hostname, hostlink, hostquality, embed_id)
     progressDialog.close()
-    MAPlayer().run(anime_id, ep_id, mp4, syn, sty, gen, episode_number, epcount)
+    MAPlayer().run(anime_id, ep_id, mp4, syn, sty, gen, episode_number, epcount, episode_link)
 
 class MAPlayer(xbmc.Player):
     def __init__(self):
@@ -275,7 +310,7 @@ class MAPlayer(xbmc.Player):
         self.anime_id = 0
         self.episode_id = 0
 
-    def run(self, anime_id, ep_id, url, synop, start, gen, epnum, epcount):
+    def run(self, anime_id, ep_id, url, synop, start, gen, epnum, epcount, eplink):
         control.sleep(200)
 
         self.anime_id = int(anime_id)
@@ -357,11 +392,17 @@ class MAPlayer(xbmc.Player):
 
         self.play(url, item)
 
-        self.playback_checker()
+        self.playback_checker(self.anime_id, eplink)
 
         pass
 
-    def playback_checker(self):
+    def playback_checker(self, ani, ep):
+        xbmc.sleep(1500)
+        if self.isPlaying():
+            pass
+        else:
+            play(ani, ep)
+        
         for i in range(0, 300):
             if self.isPlaying():
                 break

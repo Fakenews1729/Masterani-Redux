@@ -1,4 +1,8 @@
-﻿[1.1.20] - 2018-08-31
+﻿[1.1.21] - 2018-09-01
+- If a host is broken it will now ask you to choose again, or if you are using autoplay it will auto to the next host.
+- UX changes, now doesn't give "OK" notifications. Only "Notifications" notifications.
+
+[1.1.20] - 2018-08-31
 - Fix for Rapidvideo after they updated and broke the resolver. When JSergio fixes this issue I will roll back to using ResolveURL for it.
 
 [1.1.19] - 2018-08-31
@@ -6,6 +10,7 @@
 
 [1.1.18] - 2018-08-30
 - Tiwi Kiwi now works. Huge thanks to CandyFace. He is the real MVP.
+- JSON changes (LOL I'm a fucking idiot.)
 
 [1.1.17] - 2018-08-29
 - I'm an idiot and broke search I fixed it now.
