@@ -134,13 +134,12 @@ def play(anime_id, episode_id):
     l1 = "Fetching video."
     progressDialog.create(heading="Masterani Redux", line1="Fetching video.")
     progressDialog.update(0, line1=l1, line3="Loading hosts.")
-    
-    hosts = getlinks(episode_link)[0]   
+
+    hosts = getlinks(episode_link)[0]
     ep_id = getlinks(episode_link)[1]
-    #linkforcover = getcover(episode_link)
 
     if hosts is None:
-        xbmcgui.Dialog().ok("Masterani Redux", "Something went wrong.", "Please try again later.")
+        xbmcgui.Dialog().notification("Masterani Redux", "Something went wrong. Please try again later.")
         return
 
     #Remove Disabled Hosts

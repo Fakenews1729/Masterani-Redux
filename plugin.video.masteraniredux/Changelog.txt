@@ -1,4 +1,7 @@
-﻿[1.1.21] - 2018-09-01
+﻿[1.1.22] - 2018-09-01
+- Fixes an issue where it would ask you to choose genre/search again when you added to favorites.
+
+[1.1.21] - 2018-09-01
 - If a host is broken it will now ask you to choose again, or if you are using autoplay it will auto to the next host.
 - UX changes, now doesn't give "OK" notifications. Only "Notifications" notifications.
 

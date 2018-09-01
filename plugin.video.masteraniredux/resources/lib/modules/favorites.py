@@ -38,12 +38,11 @@ class Favorites:
 
     def add(self, anime_id):
         try:
-            self.dbcur.execute("INSERT OR IGNORE INTO favorites VALUES (%s)" % anime_id)
-            self.dbcon.commit()
-            control.refresh()
+                self.dbcur.execute("INSERT OR IGNORE INTO favorites VALUES (%s)" % anime_id)
+                self.dbcon.commit()
         except:
             pass
-
+            
     def delete(self, anime_id):
         try:
             self.dbcur.execute("DELETE FROM favorites WHERE (anime_id = '%s')" % anime_id)
