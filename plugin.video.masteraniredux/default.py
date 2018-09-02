@@ -68,6 +68,10 @@ elif action == 'popular':
     from resources.lib.indexers import animeshows
     animeshows.Indexer().get_popular()
 
+elif action == 'being_watched':
+    from resources.lib.indexers import animeshows
+    animeshows.Indexer().get_being_watched()
+
 elif action == 'list':
     from resources.lib.indexers import animeshows
     animeshows.Indexer().selectdialog()
