@@ -84,6 +84,10 @@ def add_favorites():
 def add_last_visited(anime_id):
     try:
         c = cache.get(masterani.get_anime_details, 8, anime_id)
+        
+        plot = c['plot']
+        premiered = c['premiered']
+        genre = c['genre']
 
         sysaddon = sys.argv[0]
         addon_poster = addon_banner = control.addonInfo('icon')
@@ -95,6 +99,10 @@ def add_last_visited(anime_id):
         fanart = "http://cdn.masterani.me/wallpaper/0/%s" % c['fanart'][0]
         item.setArt({'poster': poster})
         item.setProperty("Fanart_Image", fanart)
+        item.setInfo(type='Video', infoLabels={
+            'Plot': plot, 'Year': premiered, 'premiered': premiered,
+            'genre': genre, 'mediatype': 'tvshow' 
+        })
 
         url = '%s?action=get_episodes' % sysaddon
         try: url += '&anime_id=%s' % anime_id

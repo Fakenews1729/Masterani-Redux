@@ -1,9 +1,13 @@
-﻿[1.1.22] - 2018-09-01
-- Fixes an issue where it would ask you to choose genre/search again when you added to favorites.
+﻿[1.1.23] - 2018-09-02
+- Rolls back on previous changes, caused to many issues to stay like that.
+- Adds more detail to the Last Played on main menu, now has plot.
+
+[1.1.22] - 2018-09-01
+- Fixes an error that causes it to ask to search again when you add a favorite. 
 
 [1.1.21] - 2018-09-01
 - If a host is broken it will now ask you to choose again, or if you are using autoplay it will auto to the next host.
-- UX changes, now doesn't give "OK" notifications. Only "Notifications" notifications.
+- UX changes, now doesn't give "OK" notifications. Only "Notification" notifications.
 
 [1.1.20] - 2018-08-31
 - Fix for Rapidvideo after they updated and broke the resolver. When JSergio fixes this issue I will roll back to using ResolveURL for it.
