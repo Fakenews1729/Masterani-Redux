@@ -48,6 +48,9 @@ def main_menu():
         {'name': "Recent",
          'action': "recent"},
 
+        {'name': "Being Watched",
+         'action': "being_watched"},
+
         {'name': "Popular Today",
          'action': "popular"},
 
