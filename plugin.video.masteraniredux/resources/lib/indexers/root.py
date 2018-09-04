@@ -25,6 +25,7 @@ from resources.lib.modules import control
 # masterani_url = "http://www.masterani.me/"
 from resources.lib.modules import favorites
 from resources.lib.modules import masterani
+from resources.lib.modules import watched
 
 
 def main_menu():
@@ -47,7 +48,7 @@ def main_menu():
     items = [
         {'name': "Recent",
          'action': "recent"},
-
+         
         {'name': "Being Watched",
          'action': "being_watched"},
 
@@ -88,15 +89,22 @@ def add_last_visited(anime_id):
     try:
         c = cache.get(masterani.get_anime_details, 8, anime_id)
         
+        lastEpisode = watched.Watched().watched(anime_id)
+        
         plot = c['plot']
         premiered = c['premiered']
         genre = c['genre']
+        
+        type = c['type']
 
         sysaddon = sys.argv[0]
         addon_poster = addon_banner = control.addonInfo('icon')
         addon_fanart = control.addonInfo('fanart')
 
-        item = control.item("Last Played: [I]%s[/I]" % c['title'])
+        if type is '0':
+            item = control.item("Last Played: [I]%s[/I] - Episode %s" % (c['title'], lastEpisode))
+        else:
+            item = control.item("Last Played: [I]%s[/I]" % (c['title']))
 
         poster = "http://cdn.masterani.me/poster/%s" % c['poster']
         fanart = "http://cdn.masterani.me/wallpaper/0/%s" % c['fanart'][0]

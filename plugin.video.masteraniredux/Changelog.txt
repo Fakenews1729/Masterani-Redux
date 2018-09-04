@@ -1,4 +1,8 @@
-﻿[1.1.23] - 2018-09-02
+﻿[1.1.24] - 2018-09-04
+- Small changes to UI, now if you watched a TV show last, it tells you the last episode you watched, no change if watched a movie.
+- Added a People Watching section, and added more info to Popular Today (SuzwagKururugi arigatou).
+
+[1.1.23] - 2018-09-02
 - Rolls back on previous changes, caused to many issues to stay like that.
 - Adds more detail to the Last Played on main menu, now has plot.
 

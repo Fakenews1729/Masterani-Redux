@@ -174,15 +174,12 @@ class Indexer:
         for i in result: self.list.append({'anime_id': i['slug'].split('-', 1)[0], 'status': 1, 'title': '%s - [I]%s views[/I]' %(i['title'], i['total']), 'poster':i['poster'], 'fanart':i['fanart'], 'plot': i['plot'], 'duration': None, 'type': 0, 'rating': None, 'genre': None, 'premiered': None, 'episode_count': i['episode_count']})
         
         self.add_directory(self.list)
-
+        
     def get_being_watched(self):
         result = client.request("https://www.masterani.me/api/anime/trending/now?detailed=1")
         result = json.loads(result)
-
         print result
-
         if len(result) is 0: return
-
         for i in result: self.list.append({'anime_id': i['slug'].split('-', 1)[0], 'status': 1, 'title': '%s - [I]%s People Watching[/I]' %(i['title'], i['total']), 'poster':i['poster'], 'fanart':i['fanart'], 'plot': i['plot'], 'duration': None, 'type': 0, 'rating': None, 'genre': None, 'premiered': None, 'episode_count': i['episode_count']})
         
         self.add_directory(self.list)    
